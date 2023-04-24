@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/anasayfa"
+        android:title="Anasayfa" />
+    <item
+        android:id="@+id/categoryFragment"
+        android:icon="@drawable/kategori"
+        android:title="Kategoriler" />
+    <item
+        android:id="@+id/cartFragment"
+        android:icon="@drawable/sepet"
+        android:title="Sepetim" />
+
+</menu>
