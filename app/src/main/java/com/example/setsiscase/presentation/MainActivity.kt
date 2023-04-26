@@ -1,10 +1,16 @@
-package com.example.setsiscase
+package com.example.setsiscase.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.setsiscase.R
 import com.example.setsiscase.databinding.ActivityMainBinding
+import com.example.setsiscase.presentation.cart.CartFragment
+import com.example.setsiscase.presentation.category.CategoryFragment
+import com.example.setsiscase.presentation.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
