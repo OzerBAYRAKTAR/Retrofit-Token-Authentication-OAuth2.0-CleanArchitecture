@@ -14,7 +14,7 @@ class SessionManager @Inject constructor(@ApplicationContext context: Context) {
         Context.MODE_PRIVATE)
 
     companion object{
-        const val ACCESS_TOKEN= "access_token"
+        const val ACCESSTOKEN= "accessToken"
     }
 
     /**
@@ -22,7 +22,7 @@ class SessionManager @Inject constructor(@ApplicationContext context: Context) {
      */
     fun saveToken(token: String) {
         val editor=prefs.edit()
-        editor.putString(ACCESS_TOKEN, token)
+        editor.putString(ACCESSTOKEN, token)
         editor.apply()
 
     }
@@ -31,6 +31,6 @@ class SessionManager @Inject constructor(@ApplicationContext context: Context) {
      * Function to fetch auth token
      */
     fun getToken(): String? {
-        return prefs.getString(ACCESS_TOKEN,null)
+        return prefs.getString(ACCESSTOKEN,null)
     }
 }

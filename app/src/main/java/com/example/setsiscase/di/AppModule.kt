@@ -2,15 +2,15 @@ package com.example.setsiscase.di
 
 import android.content.Context
 import com.example.setsiscase.data.remote.AuthInterceptor
-import com.example.setsiscase.data.remote.SetsisApi
+import com.example.setsiscase.data.source.SetsisApi
 import com.example.setsiscase.data.repository.SetsisRepositoryImp
 import com.example.setsiscase.domain.repository.SetsisRepository
 import com.example.setsiscase.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -23,21 +23,24 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(): Retrofit.Builder {
-        return Retrofit.Builder().baseUrl(Constants.BASE_URL)
+    fun providesRetrofit(@ApplicationContext context: Context): SetsisApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(provideOkHttpClient(context))
+            .build()
+            .create(SetsisApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(interceptor: AuthInterceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(interceptor).build()
-    }
-
-    @Singleton
-    @Provides
-    fun providesSetsisApi(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): SetsisApi {
-        return retrofitBuilder.client(okHttpClient).build().create(SetsisApi::class.java)
+    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+        val intercepter= HttpLoggingInterceptor()
+        intercepter.level = HttpLoggingInterceptor.Level.BODY
+        return OkHttpClient.Builder().addInterceptor(
+            AuthInterceptor(context))
+            .addInterceptor(intercepter)
+            .build()
     }
 
     @Provides

@@ -1,5 +1,7 @@
 package com.example.setsiscase.data.remote.dto
 
+import com.example.setsiscase.domain.model.ProductModelUI
+
 data class Product(
     val category: Any,
     val categoryId: Int,
@@ -9,3 +11,16 @@ data class Product(
     val productName: String,
     val stock: Int
 )
+fun Product.toProductModelUI(): ProductModelUI{
+    return ProductModelUI(
+        category=category,
+        categoryId=categoryId,
+        id=id,
+        price=price,
+        productName=productName,
+        stock=stock
+    )
+}
+
+
+

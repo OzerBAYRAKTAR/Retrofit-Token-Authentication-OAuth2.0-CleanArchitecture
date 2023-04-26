@@ -17,7 +17,8 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context) 
 
         // save token for get request
         val token=sessionManager.getToken()
-        requestBuilder.addHeader("Authorization","$token")
+        requestBuilder.addHeader("Authorization","Bearer $token")
+        println(" auth $token")
 
         return chain.proceed(requestBuilder.build())
     }

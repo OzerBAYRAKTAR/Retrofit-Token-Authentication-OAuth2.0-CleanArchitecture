@@ -1,4 +1,4 @@
-package com.example.setsiscase.data.remote
+package com.example.setsiscase.data.source
 
 import com.example.setsiscase.data.remote.dto.CategoryModel
 import com.example.setsiscase.data.remote.dto.LoginRequest
@@ -11,18 +11,17 @@ import retrofit2.http.*
 interface SetsisApi {
 
     @Headers(
-        "accept: */*",
         "Content-Type: application/json"
     )
-    @POST(Constants.LOGIN_URL)
+    @POST("/api/Auth/Login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
     @GET(Constants.CATEGORY_URL)
     suspend fun getAllCategories(): List<CategoryModel>
 
-    @Headers("accept: */*")
+
     @GET(Constants.RANDOMPRODUCTS_URL)
-    suspend fun getRandomProducts(): Call<List<ProductModel>>
+    suspend fun getRandomProducts(): ProductModel
 
     @GET("/api/Product/GetByCategoryId/{CategoryId}/{pageNumber}")
     @Headers("accept: */*")

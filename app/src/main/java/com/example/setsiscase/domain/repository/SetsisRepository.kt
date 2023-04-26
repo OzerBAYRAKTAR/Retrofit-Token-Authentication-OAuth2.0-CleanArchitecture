@@ -18,7 +18,7 @@ interface SetsisRepository {
 
     suspend fun getAllCategories(): List<CategoryModel>
 
-    suspend fun getRandomProducts(): Call<List<ProductModel>>
+    suspend fun getRandomProducts():Flow<Resource<ProductModelUI>>
 
     suspend fun getProductsByCategoryId(CategoryId: Int,
                                         pageNumber: Int): List<ProductModel>
