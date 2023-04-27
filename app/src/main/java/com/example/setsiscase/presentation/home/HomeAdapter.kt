@@ -8,7 +8,7 @@ import com.example.setsiscase.databinding.ItemHomeBinding
 import com.example.setsiscase.domain.model.ProductModelUI
 
 
-class HomeAdapter(private val context: Context, var itemList: ArrayList<ProductModelUI>): RecyclerView.Adapter<HomeAdapter.ItemHolder>() {
+class HomeAdapter(var itemList: ArrayList<ProductModelUI>): RecyclerView.Adapter<HomeAdapter.ItemHolder>() {
 
 
     inner class ItemHolder(val binding:ItemHomeBinding) :
@@ -23,20 +23,18 @@ class HomeAdapter(private val context: Context, var itemList: ArrayList<ProductM
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val list=itemList[position]
-        holder.binding.homeProductName.text=list.productName
-        holder.binding.homeStockName.text=list.stock.toString()
-        holder.binding.homePrice.text=list.price.toString()
-        holder.binding.homeCategoryId.text=list.categoryId.toString()
+        holder.binding.homeProductName.text="Ürün adı: ${list.productName}"
+        holder.binding.homeStockName.text="Kalan stok: ${list.stock.toString()}"
+        holder.binding.homePrice.text="Ürün fiyatı: ${list.price.toString()}"
+        holder.binding.homeCategoryId.text="Kategori no: ${list.categoryId.toString()}"
 
     }
 
     override fun getItemCount(): Int =itemList.size
 
-    fun setData(itemList:ArrayList<ProductModelUI>)
-    {
-        this.itemList.addAll(itemList)
+    fun setData(list: ArrayList<ProductModelUI>) {
+        this.itemList = list
         notifyDataSetChanged()
     }
-
 
 }

@@ -1,21 +1,19 @@
 package com.example.setsiscase.presentation.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.setsiscase.R
-import com.example.setsiscase.data.remote.dto.LoginResponse
 import com.example.setsiscase.databinding.FragmentHomeBinding
 import com.example.setsiscase.domain.model.ProductModelUI
-import com.example.setsiscase.util.Resource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -31,43 +29,38 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         fragmentBinding=binding
 
         viewModel= ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
-        recyclerViewItems()
-        viewModel.getRandomProducts()
-
-        collectData()
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.getRandomProducts()
+        }
+        recyclerView()
+        callAPI()
 
     }
 
-    private fun collectData() {
-        with(viewModel) {
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                _state.collect{ respone ->
+    private fun callAPI(){
+        CoroutineScope(Dispatchers.Main).launch {
+                viewModel._state.collect{value->
                     when {
-                        respone.isLoading -> {
-
-                            Toast.makeText(requireContext(), "Lütfen Bekleyin", Toast.LENGTH_SHORT).show()
+                        value.isLoading -> {
                         }
-                        respone.error.isNotBlank()-> {
-
-                            Toast.makeText(requireContext(), "hata oldu", Toast.LENGTH_LONG).show()
+                        value.error.isNotBlank() -> {
                         }
-                        respone.infoList.isNotEmpty()-> {
-                            adapter.setData(respone.infoList as ArrayList<ProductModelUI>)
-                            fragmentBinding?.homeRecyclerView?.setHasFixedSize(true)
-                            Log.e("Resource",  "")
-
+                        value.infoList.isNotEmpty() -> {
+                            list.addAll(value.infoList)
+                            adapter.setData(list as ArrayList<ProductModelUI>)
                         }
                     }
+                    delay(1000)
                 }
             }
         }
-    }
-    private fun recyclerViewItems() {
-
-        adapter= HomeAdapter(requireContext(),ArrayList())
-        fragmentBinding?.homeRecyclerView?.layoutManager=LinearLayoutManager(requireContext())
-        fragmentBinding?.homeRecyclerView?.adapter= adapter
-
+    private fun recyclerView(){
+        adapter= HomeAdapter(ArrayList())
+        fragmentBinding?.homeRecyclerView?.adapter = adapter
+        fragmentBinding?.homeRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
+        fragmentBinding!!.homeRecyclerView.setHasFixedSize(true)
     }
 
 }
+
+

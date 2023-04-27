@@ -7,13 +7,13 @@ data class Category(
     val createdDate: String,
     val id: Int,
     val products: Any
-)
-
-fun Category.toCategoryModelUI(): CategoryModelUI{
-    return CategoryModelUI(
-        categoryName=categoryName,
-        createdDate=createdDate,
-        id=id,
-        products=products
-    )
+){
+    fun toCategoryModelUI(): CategoryModelUI{
+        return CategoryModelUI(
+            categoryName=categoryName,
+            createdDate=createdDate,
+            id=id
+        )
+    }
 }
+

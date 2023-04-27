@@ -10,10 +10,9 @@ data class Product(
     val price: Double,
     val productName: String,
     val stock: Int
-)
-fun Product.toProductModelUI(): ProductModelUI{
+){
+    fun toProductModelUI(): ProductModelUI{
     return ProductModelUI(
-        category=category,
         categoryId=categoryId,
         id=id,
         price=price,
@@ -21,6 +20,9 @@ fun Product.toProductModelUI(): ProductModelUI{
         stock=stock
     )
 }
+
+}
+
 
 
 
