@@ -16,7 +16,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var adapter: HomeAdapter
@@ -55,12 +55,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
     private fun recyclerView(){
-        adapter= HomeAdapter(ArrayList())
+        adapter= HomeAdapter(ArrayList(),this)
         fragmentBinding?.homeRecyclerView?.adapter = adapter
         fragmentBinding?.homeRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
         fragmentBinding!!.homeRecyclerView.setHasFixedSize(true)
-    }
+      }
 
+
+
+    override fun onItemClicked(product: ProductModelUI) {
+        viewModel.insertProduct(product)
+        Toast.makeText(requireContext(), "favoriye eklendi ${product.productName}", Toast.LENGTH_SHORT).show()
+    }
 }
+
 
 

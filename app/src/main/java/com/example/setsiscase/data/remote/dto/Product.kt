@@ -1,6 +1,9 @@
 package com.example.setsiscase.data.remote.dto
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.setsiscase.domain.model.ProductModelUI
+
 
 data class Product(
     val category: Any,
@@ -10,8 +13,12 @@ data class Product(
     val price: Double,
     val productName: String,
     val stock: Int
-){
-    fun toProductModelUI(): ProductModelUI{
+)
+
+{
+
+}
+    fun Product.toProductModelUI(): ProductModelUI{
     return ProductModelUI(
         categoryId=categoryId,
         id=id,
@@ -19,7 +26,7 @@ data class Product(
         productName=productName,
         stock=stock
     )
-}
+
 
 }
 

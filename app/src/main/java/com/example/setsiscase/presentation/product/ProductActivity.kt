@@ -19,7 +19,7 @@ class ProductActivity : AppCompatActivity() {
     private lateinit var viewModel: ProductsViewModel
     var list = arrayListOf<ProductModelUI>()
     private lateinit var adapter: ProductAdapter
-    private var categoryId:Int = 0
+    private var pageNumber= listOf(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +29,9 @@ class ProductActivity : AppCompatActivity() {
         viewModel= ViewModelProvider(this).get(ProductsViewModel::class.java)
 
         if(intent!=null){
-            val id = intent.getIntExtra("id",43)
-            println("gelen int=$id")
+            val id = intent.getIntExtra("id",0)
             Log.d("insideIntent",id.toString())
-            viewModel.getProductById(id)
+            viewModel.getProductById(id,pageNumber)
             callSetsisApi(id)
         }
         recyclerView()
@@ -42,15 +41,12 @@ class ProductActivity : AppCompatActivity() {
                 viewModel._state.collect{value->
                     when {
                         value.isLoading -> {
-                            println("loading")
                             Log.d("idloading", CategoryId.toString())
                         }
                         value.error.isNotBlank() -> {
-                            println("error")
                             Log.d("iderror",CategoryId.toString())
                         }
                         value.infoList.isNotEmpty() -> {
-                            println("geldi")
                             list.addAll(value.infoList)
                             adapter.setData(list as ArrayList<ProductModelUI>)
                         }

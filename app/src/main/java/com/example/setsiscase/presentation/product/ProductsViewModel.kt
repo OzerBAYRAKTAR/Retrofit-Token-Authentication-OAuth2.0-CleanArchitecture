@@ -2,8 +2,8 @@ package com.example.setsiscase.presentation.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.setsiscase.domain.use_case.get_home.GetHomeUseCase
-import com.example.setsiscase.domain.use_case.get_product.GetProductUseCase
+import com.example.setsiscase.domain.use_case.api_use_case.get_home.GetHomeUseCase
+import com.example.setsiscase.domain.use_case.api_use_case.get_product.GetProductUseCase
 import com.example.setsiscase.presentation.home.HomeListState
 import com.example.setsiscase.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,8 +22,8 @@ class ProductsViewModel @Inject constructor(
     private val state = MutableStateFlow(ProductListState())
     var _state : StateFlow<ProductListState> = state
 
-    fun getProductById(categoryId: Int)=viewModelScope.launch(Dispatchers.IO){
-        getProductUseCase(categoryId).collect{
+    fun getProductById(categoryId: Int,pageNumber: List<Int>)=viewModelScope.launch(Dispatchers.IO){
+        getProductUseCase(categoryId,pageNumber).collect{
             when(it){
                 is Resource.Success ->{
                     state.value = ProductListState(infoList = it.data ?: emptyList())

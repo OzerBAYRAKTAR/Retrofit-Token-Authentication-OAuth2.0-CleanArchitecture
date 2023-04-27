@@ -1,8 +1,9 @@
-package com.example.setsiscase.domain.use_case.get_product
+package com.example.setsiscase.domain.use_case.api_use_case.get_product
 
 
+import com.example.setsiscase.data.remote.dto.toProductModelUI
 import com.example.setsiscase.domain.model.ProductModelUI
-import com.example.setsiscase.domain.repository.SetsisRepository
+import com.example.setsiscase.domain.repository.api.SetsisRepository
 import com.example.setsiscase.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,10 +15,10 @@ class GetProductUseCase @Inject constructor(
     private val repository: SetsisRepository
 ) {
 
-    operator fun invoke(categoryId: Int): Flow<Resource<List<ProductModelUI>>> = flow {
+    operator fun invoke(categoryId: Int,pageNumber: List<Int>): Flow<Resource<List<ProductModelUI>>> = flow {
         try {
             emit(Resource.Loading<List<ProductModelUI>>())
-            val products = repository.getProductsByCategoryId(categoryId).products.map {
+            val products = repository.getProductsByCategoryId(categoryId,pageNumber).products.map {
                 it.toProductModelUI()
             }
             emit(Resource.Success<List<ProductModelUI>>(products))

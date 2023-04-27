@@ -1,8 +1,7 @@
-package com.example.setsiscase.domain.use_case.get_category
+package com.example.setsiscase.domain.use_case.api_use_case.get_category
 
 import com.example.setsiscase.domain.model.CategoryModelUI
-import com.example.setsiscase.domain.model.ProductModelUI
-import com.example.setsiscase.domain.repository.SetsisRepository
+import com.example.setsiscase.domain.repository.api.SetsisRepository
 import com.example.setsiscase.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

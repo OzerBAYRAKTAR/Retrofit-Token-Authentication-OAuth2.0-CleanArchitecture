@@ -1,4 +1,4 @@
-package com.example.setsiscase.data.source
+package com.example.setsiscase.data.source.api
 
 import com.example.setsiscase.data.remote.dto.*
 import com.example.setsiscase.util.Constants
@@ -24,5 +24,6 @@ interface SetsisApi {
     @Headers("accept: */*")
     suspend fun getProductsByCategoryId(
         @Query("CategoryId") categoryId: Int,
+        @Query("pageNumber") pageNumber: List<Int>
     ): ProductModel
 }

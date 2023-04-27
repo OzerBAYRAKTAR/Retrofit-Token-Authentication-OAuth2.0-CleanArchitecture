@@ -2,8 +2,8 @@ package com.example.setsiscase.presentation.category
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.setsiscase.domain.use_case.get_category.GetCategoryUseCase
-import com.example.setsiscase.domain.use_case.get_home.GetHomeUseCase
+import com.example.setsiscase.domain.use_case.api_use_case.get_category.GetCategoryUseCase
+import com.example.setsiscase.domain.use_case.api_use_case.get_home.GetHomeUseCase
 import com.example.setsiscase.presentation.home.HomeListState
 import com.example.setsiscase.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
