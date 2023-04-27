@@ -20,10 +20,9 @@ interface SetsisApi {
     @GET(Constants.RANDOMPRODUCTS_URL)
     suspend fun getRandomProducts(): ProductModel
 
-    @GET("/api/Product/GetByCategoryId/{CategoryId}/{pageNumber}")
+    @GET("/api/Product/GetByCategoryId")
     @Headers("accept: */*")
     suspend fun getProductsByCategoryId(
-        @Path("CategoryId") CategoryId: Int,
-        @Path("pageNumber") pageNumber: Int
+        @Query("CategoryId") categoryId: Int,
     ): ProductModel
 }

@@ -14,10 +14,10 @@ class GetProductUseCase @Inject constructor(
     private val repository: SetsisRepository
 ) {
 
-    operator fun invoke(CategoryId: Int, pageNumber: Int): Flow<Resource<List<ProductModelUI>>> = flow {
+    operator fun invoke(categoryId: Int): Flow<Resource<List<ProductModelUI>>> = flow {
         try {
             emit(Resource.Loading<List<ProductModelUI>>())
-            val products = repository.getProductsByCategoryId(CategoryId,pageNumber).products.map {
+            val products = repository.getProductsByCategoryId(categoryId).products.map {
                 it.toProductModelUI()
             }
             emit(Resource.Success<List<ProductModelUI>>(products))

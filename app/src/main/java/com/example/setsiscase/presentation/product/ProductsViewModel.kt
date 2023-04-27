@@ -22,8 +22,8 @@ class ProductsViewModel @Inject constructor(
     private val state = MutableStateFlow(ProductListState())
     var _state : StateFlow<ProductListState> = state
 
-    fun getRandomProducts(CategoryId: Int, pageNumber: Int)=viewModelScope.launch(Dispatchers.IO){
-        getProductUseCase(CategoryId, pageNumber).collect{
+    fun getProductById(categoryId: Int)=viewModelScope.launch(Dispatchers.IO){
+        getProductUseCase(categoryId).collect{
             when(it){
                 is Resource.Success ->{
                     state.value = ProductListState(infoList = it.data ?: emptyList())

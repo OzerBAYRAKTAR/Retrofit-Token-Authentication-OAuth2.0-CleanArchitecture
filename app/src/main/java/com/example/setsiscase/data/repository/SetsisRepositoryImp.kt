@@ -25,8 +25,8 @@ class SetsisRepositoryImp(
         return api.getRandomProducts()
     }
 
-    override suspend fun getProductsByCategoryId(CategoryId: Int, pageNumber: Int): ProductModel {
-        return api.getProductsByCategoryId(CategoryId,pageNumber)
+    override suspend fun getProductsByCategoryId(categoryId: Int): ProductModel {
+        return api.getProductsByCategoryId(categoryId)
     }
 
 

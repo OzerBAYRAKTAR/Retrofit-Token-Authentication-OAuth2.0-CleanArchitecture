@@ -11,5 +11,5 @@ interface   SetsisRepository {
     fun login(request: LoginRequest): Call<LoginResponse>
     suspend fun getAllCategories(): CategoryModel
     suspend fun getRandomProducts(): ProductModel
-    suspend fun getProductsByCategoryId(CategoryId: Int,pageNumber: Int): ProductModel
+    suspend fun getProductsByCategoryId(categoryId: Int): ProductModel
 }
