@@ -3,6 +3,7 @@ package com.example.setsiscase.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.example.setsiscase.data.remote.AuthAuthenticator
 import com.example.setsiscase.data.remote.AuthInterceptor
 import com.example.setsiscase.data.source.api.SetsisApi
 import com.example.setsiscase.data.repository.api.SetsisRepositoryImp
@@ -32,23 +33,24 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(@ApplicationContext context: Context): SetsisApi {
+    fun providesRetrofit(okHttpClient: OkHttpClient): SetsisApi {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(provideOkHttpClient(context))
+            .client(okHttpClient)
             .build()
             .create(SetsisApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+    fun provideOkHttpClient(authInterceptor: AuthInterceptor,authAuthenticator: AuthAuthenticator): OkHttpClient {
         val intercepter= HttpLoggingInterceptor()
         intercepter.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder().addInterceptor(
-            AuthInterceptor(context))
+        return OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
             .addInterceptor(intercepter)
+            .authenticator(authAuthenticator)
             .build()
     }
 

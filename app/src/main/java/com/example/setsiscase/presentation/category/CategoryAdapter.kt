@@ -39,9 +39,5 @@ class CategoryAdapter(private val context: Context, var itemList: ArrayList<Cate
             context.startActivity(intent)
         }
     }
-
     override fun getItemCount(): Int =itemList.size
-
-
-
 }

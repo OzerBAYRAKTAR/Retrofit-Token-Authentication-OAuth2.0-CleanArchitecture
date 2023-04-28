@@ -5,6 +5,7 @@ import com.example.setsiscase.data.remote.dto.*
 import com.example.setsiscase.data.source.api.SetsisApi
 import com.example.setsiscase.domain.repository.api.SetsisRepository
 import retrofit2.Call
+import retrofit2.Response
 
 
 class SetsisRepositoryImp(
@@ -24,6 +25,10 @@ class SetsisRepositoryImp(
 
     override suspend fun getProductsByCategoryId(categoryId: Int,pageNumber:List<Int>): ProductModel {
         return api.getProductsByCategoryId(categoryId,pageNumber)
+    }
+
+    override suspend fun refreshAccessToken(refreshToken: String): Response<LoginResponse> {
+        return api.refreshAccessToken(refreshToken)
     }
 
 

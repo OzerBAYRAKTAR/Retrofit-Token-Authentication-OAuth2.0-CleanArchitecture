@@ -37,8 +37,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel= ViewModelProvider(this).get(LoginViewModel::class.java)
 
         userLogin()
-
-
     }
     private fun userLogin() {
         binding.loginButton.setOnClickListener {
