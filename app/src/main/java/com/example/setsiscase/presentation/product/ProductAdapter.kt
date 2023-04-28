@@ -3,16 +3,26 @@ package com.example.setsiscase.presentation.product
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.setsiscase.databinding.ItemHomeBinding
 import com.example.setsiscase.databinding.ItemProductsBinding
 import com.example.setsiscase.domain.model.ProductModelUI
+import com.example.setsiscase.presentation.home.OnItemClickListener
 
 
-class ProductAdapter(var itemList: ArrayList<ProductModelUI>): RecyclerView.Adapter<ProductAdapter.ItemHolder>() {
+class ProductAdapter(
+    var itemList: ArrayList<ProductModelUI>,
+    val itemClickListener: OnItemClickListenerProduct
+): RecyclerView.Adapter<ProductAdapter.ItemHolder>() {
 
 
-    inner class ItemHolder(val binding: ItemProductsBinding) :
+     class ItemHolder(val binding: ItemProductsBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+         fun bind(product: ProductModelUI,clickListener: OnItemClickListenerProduct){
+
+             binding.addToCartProductFragment.setOnClickListener {
+                 clickListener.onItemClicked(product)
+             }
+         }
 
     }
 
@@ -28,6 +38,9 @@ class ProductAdapter(var itemList: ArrayList<ProductModelUI>): RecyclerView.Adap
         holder.binding.productPrice.text="Ürün fiyatı: ${list.price.toString()}"
         holder.binding.productCategoryId.text="Kategori no: ${list.categoryId.toString()}"
 
+        val product= itemList.get(position)
+        holder.bind(product,itemClickListener)
+
     }
 
     override fun getItemCount(): Int =itemList.size
@@ -37,4 +50,7 @@ class ProductAdapter(var itemList: ArrayList<ProductModelUI>): RecyclerView.Adap
         notifyDataSetChanged()
     }
 
+}
+interface OnItemClickListenerProduct{
+    fun onItemClicked(product: ProductModelUI)
 }

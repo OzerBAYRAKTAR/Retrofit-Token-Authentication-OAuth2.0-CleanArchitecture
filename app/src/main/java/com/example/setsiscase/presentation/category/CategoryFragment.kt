@@ -43,15 +43,21 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
             viewModel._state.collect{value->
                 when {
                     value.isLoading -> {
+                        fragmentBinding!!.categoryProgressBar.visibility=View.VISIBLE
+                        fragmentBinding!!.categoryError.visibility=View.INVISIBLE
                     }
                     value.error.isNotBlank() -> {
+                        fragmentBinding!!.categoryProgressBar.visibility=View.INVISIBLE
+                        fragmentBinding!!.categoryError.visibility=View.VISIBLE
                     }
                     value.infoList.isNotEmpty() -> {
+                        fragmentBinding!!.categoryProgressBar.visibility=View.INVISIBLE
+                        fragmentBinding!!.categoryError.visibility=View.INVISIBLE
                         list.addAll(value.infoList)
                         adapter.setList(list as ArrayList<CategoryModelUI>)
                     }
                 }
-                delay(1000)
+                delay(400)
             }
         }
     }

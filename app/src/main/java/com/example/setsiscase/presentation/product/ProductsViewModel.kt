@@ -2,8 +2,10 @@ package com.example.setsiscase.presentation.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.setsiscase.domain.model.ProductModelUI
 import com.example.setsiscase.domain.use_case.api_use_case.get_home.GetHomeUseCase
 import com.example.setsiscase.domain.use_case.api_use_case.get_product.GetProductUseCase
+import com.example.setsiscase.domain.use_case.room_use_case.RoomUseCases
 import com.example.setsiscase.presentation.home.HomeListState
 import com.example.setsiscase.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductsViewModel @Inject constructor(
-    private val getProductUseCase: GetProductUseCase
+    private val getProductUseCase: GetProductUseCase,
+    private val usesCases: RoomUseCases
 ): ViewModel() {
 
     private val state = MutableStateFlow(ProductListState())
@@ -35,6 +38,11 @@ class ProductsViewModel @Inject constructor(
                     state.value = ProductListState(error = it.message?:"An Unexpected Error")
                 }
             }
+        }
+    }
+    fun insertProduct(product: ProductModelUI) {
+        viewModelScope.launch {
+            usesCases.addCart.invoke(product)
         }
     }
 

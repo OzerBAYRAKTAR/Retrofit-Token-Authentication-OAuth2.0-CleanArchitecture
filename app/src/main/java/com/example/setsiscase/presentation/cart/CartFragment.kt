@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -73,10 +74,16 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             viewModel._state.collect{value->
                 when {
                     value.isLoading -> {
+                        fragmentBinding!!.cartProgressBar.visibility=View.VISIBLE
+                        fragmentBinding!!.cartError.visibility=View.INVISIBLE
                     }
                     value.error.isNotBlank() -> {
+                        fragmentBinding!!.cartProgressBar.visibility=View.INVISIBLE
+                        fragmentBinding!!.cartError.visibility=View.VISIBLE
                     }
                     value.infoList.isNotEmpty() -> {
+                        fragmentBinding!!.cartProgressBar.visibility=View.INVISIBLE
+                        fragmentBinding!!.cartError.visibility=View.INVISIBLE
                         list.addAll(value.infoList)
                         cartadapter.setList(list as ArrayList<ProductModelUI>)
                     }
@@ -90,7 +97,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         fragmentBinding?.cartRecyclerView?.adapter = cartadapter
         fragmentBinding?.cartRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
         fragmentBinding!!.cartRecyclerView.setHasFixedSize(true)
-        }
     }
+}
+
 
 

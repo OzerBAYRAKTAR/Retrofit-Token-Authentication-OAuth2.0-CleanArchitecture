@@ -6,7 +6,7 @@ import com.example.setsiscase.domain.model.CategoryModelUI
 import com.example.setsiscase.domain.model.ProductModelUI
 import retrofit2.Call
 
-interface   SetsisRepository {
+interface  SetsisRepository {
 
     fun login(request: LoginRequest): Call<LoginResponse>
     suspend fun getAllCategories(): CategoryModel

@@ -36,15 +36,5 @@ class CartAdapter(var itemList: ArrayList<ProductModelUI>):
 
     override fun getItemCount(): Int = itemList.size
 }
-/*
-private val diffUtil = object : DiffUtil.ItemCallback<ProductModelUI>() {
-        override fun areItemsTheSame(oldItem: ProductModelUI, newItem: ProductModelUI): Boolean {
-            return oldItem.id == newItem.id
-        }
 
-        override fun areContentsTheSame(oldItem: ProductModelUI, newItem: ProductModelUI): Boolean {
-            return oldItem == newItem
-        }
-    }
-    val differ = AsyncListDiffer(this,diffUtil)
- */
+

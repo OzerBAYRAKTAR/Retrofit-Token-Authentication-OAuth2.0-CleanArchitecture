@@ -4,10 +4,8 @@ package com.example.setsiscase.presentation.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.setsiscase.data.remote.dto.Product
 import com.example.setsiscase.databinding.ItemHomeBinding
 import com.example.setsiscase.domain.model.ProductModelUI
-import com.example.setsiscase.presentation.home.OnItemClickListener
 
 
 class HomeAdapter(var itemList: ArrayList<ProductModelUI>,
@@ -38,7 +36,7 @@ class HomeAdapter(var itemList: ArrayList<ProductModelUI>,
         holder.binding.homePrice.text="Ürün fiyatı: ${list.price.toString()}"
         holder.binding.homeCategoryId.text="Kategori no: ${list.categoryId.toString()}"
 
-        //favorites
+        //add to cart
         val product= itemList.get(position)
         holder.bind(product,itemClickListener)
 

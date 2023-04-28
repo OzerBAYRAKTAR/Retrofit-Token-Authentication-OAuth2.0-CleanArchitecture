@@ -42,15 +42,21 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                 viewModel._state.collect{value->
                     when {
                         value.isLoading -> {
+                            fragmentBinding!!.homeProgressBar.visibility=View.VISIBLE
+                            fragmentBinding!!.homeError.visibility=View.INVISIBLE
                         }
                         value.error.isNotBlank() -> {
+                            fragmentBinding!!.homeProgressBar.visibility=View.INVISIBLE
+                            fragmentBinding!!.homeError.visibility=View.VISIBLE
                         }
                         value.infoList.isNotEmpty() -> {
+                            fragmentBinding!!.homeProgressBar.visibility=View.INVISIBLE
+                            fragmentBinding!!.homeError.visibility=View.INVISIBLE
                             list.addAll(value.infoList)
                             adapter.setData(list as ArrayList<ProductModelUI>)
                         }
                     }
-                    delay(1000)
+                    delay(400)
                 }
             }
         }
@@ -65,7 +71,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
 
     override fun onItemClicked(product: ProductModelUI) {
         viewModel.insertProduct(product)
-        Toast.makeText(requireContext(), "favoriye eklendi ${product.productName}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Sepete eklendi ${product.productName}", Toast.LENGTH_SHORT).show()
     }
 }
 
