@@ -26,21 +26,36 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private lateinit var viewModel:LoginViewModel
+    private var id="testuser"
+    private var pass="123456"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
-        val username = binding.usernameInput.text.toString().trim()
-        val password = binding.usernameInput.text.toString().trim()
 
         viewModel= ViewModelProvider(this).get(LoginViewModel::class.java)
-        viewModel.getLogin()
 
-        
+        userLogin()
+
+
+    }
+    private fun userLogin() {
         binding.loginButton.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            val username = binding.usernameInput.text.toString().trim()
+            val password = binding.passwordInput.text.toString().trim()
+
+            if (username.isEmpty() || password.isEmpty()){
+                Toast.makeText(this, "kullanıcı adı/şifre boş bırakılamaz", Toast.LENGTH_SHORT).show()
+            }else {
+                if (username.equals(id) && password.equals(pass)){
+                    viewModel.getLogin()
+                    startActivity(Intent(this,MainActivity::class.java))
+                }else{
+                    Toast.makeText(this, "Kullanıcı adı/şifre hatalı", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
+
 }

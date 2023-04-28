@@ -7,25 +7,6 @@
     tools:context=".presentation.cart.CartFragment">
 
 
-    <ProgressBar
-        android:id="@+id/cartProgressBar"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/cartError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Error! Lütfen Tekrar Deneyin"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,12 +26,45 @@
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="110dp"
         android:layout_marginTop="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cartRecyclerView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sepeti Onayla"
+            android:layout_gravity="center_vertical"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:paddingLeft="15dp"/>
+        <TextView
+            android:id="@+id/cart_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 $"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:layout_gravity="center_vertical"
+            android:textSize="25sp"
+            android:paddingRight="15dp"/>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

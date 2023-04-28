@@ -20,4 +20,8 @@ class SetsisRoomRepositoryImp(
     override suspend fun delete(product: ProductModelUI) {
         return dao.delete(product)
     }
+
+    override  fun getTotalCart(): LiveData<Int> {
+        return dao.getTotalCart()
+    }
 }

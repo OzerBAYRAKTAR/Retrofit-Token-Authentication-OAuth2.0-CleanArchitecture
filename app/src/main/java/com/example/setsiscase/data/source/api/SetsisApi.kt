@@ -11,7 +11,8 @@ interface SetsisApi {
         "Content-Type: application/json"
     )
     @POST("/api/Auth/Login")
-    fun login(@Body request: LoginRequest): Call<LoginResponse>
+     fun login(@Body loginRequest: LoginRequest
+    ): Call<LoginResponse>
 
     @GET(Constants.CATEGORY_URL)
     suspend fun getAllCategories(): CategoryModel

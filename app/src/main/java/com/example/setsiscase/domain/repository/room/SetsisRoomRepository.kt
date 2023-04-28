@@ -12,4 +12,6 @@ interface SetsisRoomRepository {
     suspend fun upsert(product: ProductModelUI)
 
     suspend fun delete(product: ProductModelUI)
+
+    fun getTotalCart(): LiveData<Int>
 }

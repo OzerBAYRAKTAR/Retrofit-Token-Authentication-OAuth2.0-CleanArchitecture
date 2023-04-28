@@ -75,6 +75,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
 
+    //jetpack datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
     //Hilt
     implementation 'com.google.dagger:hilt-android:2.45'
     kapt 'com.google.dagger:hilt-compiler:2.45'

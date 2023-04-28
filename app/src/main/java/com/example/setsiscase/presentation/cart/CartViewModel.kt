@@ -3,8 +3,10 @@ package com.example.setsiscase.presentation.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.setsiscase.data.repository.room.SetsisRoomRepositoryImp
 import com.example.setsiscase.data.source.RoomDb.SetsisDatabase
 import com.example.setsiscase.domain.model.ProductModelUI
+import com.example.setsiscase.domain.repository.room.SetsisRoomRepository
 import com.example.setsiscase.domain.use_case.room_use_case.RoomUseCases
 import com.example.setsiscase.presentation.category.CategoryListState
 import com.example.setsiscase.util.Resource
@@ -19,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private val usesCases: RoomUseCases,
-    val database: SetsisDatabase
+    val repo: SetsisRoomRepository
 ): ViewModel(){
 
 
@@ -50,6 +52,9 @@ class CartViewModel @Inject constructor(
         viewModelScope.launch {
             usesCases.addCart.invoke(product)
         }
+    }
+     fun getSumOfCarts(): LiveData<Int> {
+        return repo.getTotalCart()
     }
 }
 

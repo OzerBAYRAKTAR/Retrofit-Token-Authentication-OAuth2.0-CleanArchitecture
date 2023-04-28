@@ -7,7 +7,7 @@ import com.example.setsiscase.data.remote.dto.Product
 import com.example.setsiscase.domain.model.ProductModelUI
 
 
-@Database(entities = [ProductModelUI::class], version = 1)
+@Database(entities = [ProductModelUI::class], version = 2)
 @TypeConverters(TypeConverter::class)
 abstract class SetsisDatabase: RoomDatabase() {
 

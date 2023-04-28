@@ -65,7 +65,8 @@ object AppModule {
             app,
             SetsisDatabase::class.java,
             SetsisDatabase.DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

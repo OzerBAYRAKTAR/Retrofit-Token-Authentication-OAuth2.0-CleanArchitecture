@@ -32,6 +32,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private var fragmentBinding: FragmentCartBinding?= null
     private lateinit var viewModel : CartViewModel
     private lateinit var cartadapter: CartAdapter
+    private var totalCart:Int=0
     var list = arrayListOf<ProductModelUI>()
 
 
@@ -45,6 +46,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.getAllCartProducts()
         }
+        getSumOfCart()
+
 
         val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -74,16 +77,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             viewModel._state.collect{value->
                 when {
                     value.isLoading -> {
-                        fragmentBinding!!.cartProgressBar.visibility=View.VISIBLE
-                        fragmentBinding!!.cartError.visibility=View.INVISIBLE
                     }
                     value.error.isNotBlank() -> {
-                        fragmentBinding!!.cartProgressBar.visibility=View.INVISIBLE
-                        fragmentBinding!!.cartError.visibility=View.VISIBLE
                     }
                     value.infoList.isNotEmpty() -> {
-                        fragmentBinding!!.cartProgressBar.visibility=View.INVISIBLE
-                        fragmentBinding!!.cartError.visibility=View.INVISIBLE
                         list.addAll(value.infoList)
                         cartadapter.setList(list as ArrayList<ProductModelUI>)
                     }
@@ -98,6 +95,16 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         fragmentBinding?.cartRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
         fragmentBinding!!.cartRecyclerView.setHasFixedSize(true)
     }
+    private fun getSumOfCart() {
+        viewModel.getSumOfCarts().observe(viewLifecycleOwner, Observer {
+            it?.let{
+                totalCart=it
+                fragmentBinding!!.cartSum.text="${totalCart} $"
+
+            }
+        })
+    }
+
 }
 
 

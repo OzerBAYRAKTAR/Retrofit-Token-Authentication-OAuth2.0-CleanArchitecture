@@ -17,4 +17,7 @@ interface SetsisDao {
 
     @Query("SELECT * FROM favorites")
     fun getAllProducts(): List<ProductModelUI>
+
+    @Query("SELECT SUM(price) from favorites")
+    fun getTotalCart():LiveData<Int>
 }
