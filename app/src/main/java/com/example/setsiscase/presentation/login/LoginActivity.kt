@@ -31,14 +31,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        
+        val username = binding.usernameInput.text.toString().trim()
+        val password = binding.usernameInput.text.toString().trim()
 
         viewModel= ViewModelProvider(this).get(LoginViewModel::class.java)
         viewModel.getLogin()
 
-
-
-
-       
+        
         binding.loginButton.setOnClickListener {
             startActivity(Intent(this,MainActivity::class.java))
         }
