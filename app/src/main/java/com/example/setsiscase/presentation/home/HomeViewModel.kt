@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.setsiscase.domain.model.ProductModelUI
 import com.example.setsiscase.domain.use_case.api_use_case.get_home.GetHomeUseCase
 import com.example.setsiscase.domain.use_case.room_use_case.RoomUseCases
-import com.example.setsiscase.util.Resource
+import com.example.setsiscase.util.ResourceUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,13 +26,13 @@ class HomeViewModel @Inject constructor(
     fun getRandomProducts()=viewModelScope.launch(Dispatchers.IO){
         getHomeUseCase().collect{
             when(it){
-                is Resource.Success ->{
+                is ResourceUtil.Success ->{
                     state.value = HomeListState(infoList = it.data ?: emptyList())
                 }
-                is Resource.Loading ->{
+                is ResourceUtil.Loading ->{
                     state.value = HomeListState(isLoading = true)
                 }
-                is Resource.Error ->{
+                is ResourceUtil.Error ->{
                     state.value = HomeListState(error = it.message?:"An Unexpected Error")
                 }
             }

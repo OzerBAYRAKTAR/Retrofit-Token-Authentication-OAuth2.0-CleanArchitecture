@@ -27,9 +27,5 @@ class SetsisRepositoryImp(
         return api.getProductsByCategoryId(categoryId,pageNumber)
     }
 
-    override suspend fun refreshAccessToken(refreshToken: String): Response<LoginResponse> {
-        return api.refreshAccessToken(refreshToken)
-    }
-
 
 }

@@ -3,13 +3,10 @@ package com.example.setsiscase.presentation.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.setsiscase.data.repository.room.SetsisRoomRepositoryImp
-import com.example.setsiscase.data.source.RoomDb.SetsisDatabase
 import com.example.setsiscase.domain.model.ProductModelUI
 import com.example.setsiscase.domain.repository.room.SetsisRoomRepository
 import com.example.setsiscase.domain.use_case.room_use_case.RoomUseCases
-import com.example.setsiscase.presentation.category.CategoryListState
-import com.example.setsiscase.util.Resource
+import com.example.setsiscase.util.ResourceUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,13 +28,13 @@ class CartViewModel @Inject constructor(
     fun getAllCartProducts()=viewModelScope.launch(Dispatchers.IO){
         usesCases.getAllCart.invoke().collect{
             when(it){
-                is Resource.Success ->{
+                is ResourceUtil.Success ->{
                     state.value = CartListState(infoList = it.data ?: emptyList())
                 }
-                is Resource.Loading ->{
+                is ResourceUtil.Loading ->{
                     state.value = CartListState(isLoading = true)
                 }
-                is Resource.Error ->{
+                is ResourceUtil.Error ->{
                     state.value = CartListState(error = it.message?:"An Unexpected Error")
                 }
             }

@@ -7,11 +7,11 @@ import com.example.setsiscase.data.remote.dto.LoginResponse
 import com.example.setsiscase.domain.repository.api.SetsisRepository
 import com.example.setsiscase.util.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
-
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -22,9 +22,9 @@ class LoginViewModel @Inject constructor(
 
 
     fun getLogin() {
-        val login=LoginRequest("testuser","123456")
+        val login= LoginRequest("testuser","123456")
         repository.login(login)
-            .enqueue(object : Callback<LoginResponse>{
+            .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
@@ -34,9 +34,7 @@ class LoginViewModel @Inject constructor(
                         sessionManager.saveToken(loginResponse.token.accessToken)
                     }
                 }
-
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-
                 }
 
             })

@@ -3,11 +3,9 @@ package com.example.setsiscase.presentation.product
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.setsiscase.domain.model.ProductModelUI
-import com.example.setsiscase.domain.use_case.api_use_case.get_home.GetHomeUseCase
 import com.example.setsiscase.domain.use_case.api_use_case.get_product.GetProductUseCase
 import com.example.setsiscase.domain.use_case.room_use_case.RoomUseCases
-import com.example.setsiscase.presentation.home.HomeListState
-import com.example.setsiscase.util.Resource
+import com.example.setsiscase.util.ResourceUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,13 +26,13 @@ class ProductsViewModel @Inject constructor(
     fun getProductById(categoryId: Int,pageNumber: List<Int>)=viewModelScope.launch(Dispatchers.IO){
         getProductUseCase(categoryId,pageNumber).collect{
             when(it){
-                is Resource.Success ->{
+                is ResourceUtil.Success ->{
                     state.value = ProductListState(infoList = it.data ?: emptyList())
                 }
-                is Resource.Loading ->{
+                is ResourceUtil.Loading ->{
                     state.value = ProductListState(isLoading = true)
                 }
-                is Resource.Error ->{
+                is ResourceUtil.Error ->{
                     state.value = ProductListState(error = it.message?:"An Unexpected Error")
                 }
             }

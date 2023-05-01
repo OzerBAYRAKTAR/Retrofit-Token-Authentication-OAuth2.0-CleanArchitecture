@@ -3,9 +3,7 @@ package com.example.setsiscase.presentation.category
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.setsiscase.domain.use_case.api_use_case.get_category.GetCategoryUseCase
-import com.example.setsiscase.domain.use_case.api_use_case.get_home.GetHomeUseCase
-import com.example.setsiscase.presentation.home.HomeListState
-import com.example.setsiscase.util.Resource
+import com.example.setsiscase.util.ResourceUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,13 +23,13 @@ class CategoryViewModel @Inject constructor(
     fun getAllCategories()=viewModelScope.launch(Dispatchers.IO){
         getCategoryUseCase().collect{
             when(it){
-                is Resource.Success ->{
+                is ResourceUtil.Success ->{
                     state.value = CategoryListState(infoList = it.data ?: emptyList())
                 }
-                is Resource.Loading ->{
+                is ResourceUtil.Loading ->{
                     state.value = CategoryListState(isLoading = true)
                 }
-                is Resource.Error ->{
+                is ResourceUtil.Error ->{
                     state.value = CategoryListState(error = it.message?:"An Unexpected Error")
                 }
             }

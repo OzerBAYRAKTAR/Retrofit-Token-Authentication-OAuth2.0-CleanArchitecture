@@ -1,4 +1,4 @@
-package com.example.setsiscase.data.remote
+package com.example.setsiscase.data.remote.Authentication
 
 import android.content.Context
 import com.example.setsiscase.util.SessionManager
@@ -7,10 +7,9 @@ import okhttp3.*
 import javax.inject.Inject
 
 
-class AuthInterceptor @Inject constructor() : Interceptor {
 
-    @Inject
-    lateinit var sessionManager: SessionManager
+class AuthInterceptor @Inject constructor(@ApplicationContext context: Context) : Interceptor {
+    private val sessionManager= SessionManager(context)
 
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -19,6 +18,8 @@ class AuthInterceptor @Inject constructor() : Interceptor {
         // save token for get request
         val token=sessionManager.getToken()
         requestBuilder.addHeader("Authorization","Bearer $token")
+        println(" auth $token")
+
         return chain.proceed(requestBuilder.build())
     }
 
