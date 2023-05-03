@@ -4,10 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.setsiscase.R
+import com.example.setsiscase.data.remote.dto.CategoryModel
+import com.example.setsiscase.data.remote.dto.LoginResponse
+import com.example.setsiscase.data.source.api.Resource
 import com.example.setsiscase.databinding.FragmentCategoryBinding
 import com.example.setsiscase.domain.model.CategoryModelUI
 import com.example.setsiscase.presentation.product.ProductActivity
@@ -15,7 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+import kotlin.math.log
 
 class CategoryFragment : Fragment(R.layout.fragment_category) {
 
@@ -23,6 +28,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     private lateinit var adapter: CategoryAdapter
     var list = arrayListOf<CategoryModelUI>()
     private var fragmentBinding: FragmentCategoryBinding?= null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +41,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         }
         recyclerView()
         callAPI()
+
 
     }
 
@@ -71,4 +78,3 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
 
 
 }
-

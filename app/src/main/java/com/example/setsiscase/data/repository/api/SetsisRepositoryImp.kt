@@ -11,9 +11,6 @@ import retrofit2.Response
 class SetsisRepositoryImp(
     private val api: SetsisApi
 ): SetsisRepository {
-    override fun login(request: LoginRequest): Call<LoginResponse> {
-        return api.login(request)
-    }
 
     override suspend fun getAllCategories(): CategoryModel {
         return api.getAllCategories()
@@ -23,9 +20,17 @@ class SetsisRepositoryImp(
         return api.getRandomProducts()
     }
 
-    override suspend fun getProductsByCategoryId(categoryId: Int,pageNumber:List<Int>): ProductModel {
+    override suspend fun getProductsByCategoryId(
+        categoryId: Int,
+        pageNumber: List<Int>
+    ): ProductModel {
         return api.getProductsByCategoryId(categoryId,pageNumber)
     }
+
+    override  fun login(request: LoginRequest): Call<LoginResponse> {
+        return api.login(request)
+    }
+
 
 
 }

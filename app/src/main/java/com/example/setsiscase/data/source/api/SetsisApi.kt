@@ -13,7 +13,8 @@ interface SetsisApi {
         "Content-Type: application/json"
     )
     @POST("/api/Auth/Login")
-    fun login(@Body loginRequest: LoginRequest
+     fun login(
+        @Body loginrequest: LoginRequest
     ): Call<LoginResponse>
 
     @GET(Constants.CATEGORY_URL)
@@ -29,4 +30,6 @@ interface SetsisApi {
         @Query("CategoryId") categoryId: Int,
         @Query("pageNumber") pageNumber: List<Int>
     ): ProductModel
+
+
 }

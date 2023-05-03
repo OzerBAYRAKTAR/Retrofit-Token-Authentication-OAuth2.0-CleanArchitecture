@@ -1,5 +1,6 @@
 package com.example.setsiscase.presentation.product
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.setsiscase.databinding.ActivityProductBinding
 import com.example.setsiscase.domain.model.ProductModelUI
+import com.example.setsiscase.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +39,7 @@ class ProductActivity : AppCompatActivity(),OnItemClickListenerProduct {
             callSetsisApi(id)
         }
         recyclerView()
+        goBack()
     }
     private fun callSetsisApi(CategoryId:Int){
         CoroutineScope(Dispatchers.Main).launch {
@@ -62,6 +65,12 @@ class ProductActivity : AppCompatActivity(),OnItemClickListenerProduct {
                 }
             }
         }
+    private fun goBack() {
+        binding.productBack.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
+    }
 
     private fun recyclerView(){
         adapter= ProductAdapter(ArrayList(),this)
