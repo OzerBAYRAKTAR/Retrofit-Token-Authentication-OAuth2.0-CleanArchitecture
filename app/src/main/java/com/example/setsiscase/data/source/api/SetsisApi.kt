@@ -24,12 +24,13 @@ interface SetsisApi {
     @GET(Constants.RANDOMPRODUCTS_URL)
     suspend fun getRandomProducts(): ProductModel
 
+
     @GET("/api/Product/GetByCategoryId")
     @Headers("accept: */*")
     suspend fun getProductsByCategoryId(
         @Query("CategoryId") categoryId: Int,
-        @Query("pageNumber") pageNumber: List<Int>
-    ): ProductModel
+        @Query("pageNumber") pageNumber: Int
+    ): Response<ProductModel>
 
 
 }

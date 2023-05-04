@@ -1,55 +1,67 @@
 package com.example.setsiscase.presentation.product
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.setsiscase.data.remote.dto.Product
 import com.example.setsiscase.databinding.ItemProductsBinding
 import com.example.setsiscase.domain.model.ProductModelUI
 import com.example.setsiscase.presentation.home.OnItemClickListener
+import javax.inject.Inject
 
 
-class ProductAdapter(
-    var itemList: ArrayList<ProductModelUI>,
+class ProductAdapter @Inject constructor(
     val itemClickListener: OnItemClickListenerProduct
-): RecyclerView.Adapter<ProductAdapter.ItemHolder>() {
+): PagingDataAdapter<ProductModelUI, ProductAdapter.ItemHolderProduct>(diffCallBack) {
 
+    private lateinit var binding: ItemProductsBinding
+    private lateinit var context: Context
 
-     class ItemHolder(val binding: ItemProductsBinding) :
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolderProduct {
+        val inflater = LayoutInflater.from(parent.context)
+        binding = ItemProductsBinding.inflate(inflater,parent,false)
+        context = parent.context
+        return ItemHolderProduct()
+
+    }
+
+    override fun onBindViewHolder(holder: ItemHolderProduct, position: Int) {
+        holder.bind(getItem(position)!!,itemClickListener)
+        holder.setIsRecyclable(false)
+    }
+
+    inner class ItemHolderProduct() :
         RecyclerView.ViewHolder(binding.root) {
 
          fun bind(product: ProductModelUI,clickListener: OnItemClickListenerProduct){
+             binding.apply {
+                 productProductName.text = "Ürün adı: ${product.productName}"
+                 productStockName.text="Kalan stok: ${product.stock.toString()}"
+                 productPrice.text="Ürün fiyatı: ${product.price.toString()}"
+                 productCategoryId.text="Kategori no: ${product.categoryId.toString()}"
+             }
 
              binding.addToCartProductFragment.setOnClickListener {
                  clickListener.onItemClicked(product)
              }
          }
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        val itemBinding= ItemProductsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ItemHolder(itemBinding)
+
+    companion object {
+        val diffCallBack = object : DiffUtil.ItemCallback<ProductModelUI>() {
+            override fun areItemsTheSame(oldItem: ProductModelUI, newItem: ProductModelUI): Boolean {
+                return oldItem.categoryId == newItem.categoryId
+            }
+
+            override fun areContentsTheSame(oldItem: ProductModelUI, newItem: ProductModelUI): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
-
-    override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        val list=itemList[position]
-        holder.binding.productProductName.text="Ürün adı: ${list.productName}"
-        holder.binding.productStockName.text="Kalan stok: ${list.stock.toString()}"
-        holder.binding.productPrice.text="Ürün fiyatı: ${list.price.toString()}"
-        holder.binding.productCategoryId.text="Kategori no: ${list.categoryId.toString()}"
-
-        val product= itemList.get(position)
-        holder.bind(product,itemClickListener)
-
-    }
-
-    override fun getItemCount(): Int =itemList.size
-
-    fun setData(list: ArrayList<ProductModelUI>) {
-        this.itemList = list
-        notifyDataSetChanged()
-    }
-
 }
 interface OnItemClickListenerProduct{
     fun onItemClicked(product: ProductModelUI)
