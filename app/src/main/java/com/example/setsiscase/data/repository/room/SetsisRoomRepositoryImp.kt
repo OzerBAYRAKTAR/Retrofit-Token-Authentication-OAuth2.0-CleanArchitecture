@@ -9,6 +9,7 @@ import com.example.setsiscase.domain.repository.room.SetsisRoomRepository
 class SetsisRoomRepositoryImp(
     private val dao: SetsisDao
 ) : SetsisRoomRepository {
+
     override fun getAllProducts(): List<ProductModelUI> {
         return  dao.getAllProducts()
     }

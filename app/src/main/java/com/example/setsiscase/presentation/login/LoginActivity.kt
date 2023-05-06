@@ -1,9 +1,11 @@
 package com.example.setsiscase.presentation.login
 
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
@@ -41,12 +43,13 @@ class LoginActivity : AppCompatActivity() {
                             it.value.token.accessToken,
                             it.value.token.refreshToken
                         )
+                        //viewModel.getLogin(id,pass)
+                        Toast.makeText(this@LoginActivity, "Giriş Başarılı", Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Failure ->  {
-
+                    Log.d(TAG,"ERROR")
                 }
-
                 else -> {}
             }
         })
@@ -61,8 +64,9 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "kullanıcı adı/şifre boş bırakılamaz", Toast.LENGTH_SHORT).show()
             }else {
                 if (username.equals(id) && password.equals(pass)){
-                    viewModel.getLogin()
+                    viewModel.getLogin(id,pass)
                     startActivity(Intent(this,MainActivity::class.java))
+                    finish()
                 }else{
                     Toast.makeText(this, "Kullanıcı adı/şifre hatalı", Toast.LENGTH_SHORT).show()
                 }

@@ -30,8 +30,8 @@ class LoginViewModel @Inject constructor(
     lateinit var tokenManager: TokenManager
 
 
-    fun getLogin() {
-        val login= LoginRequest("testuser","123456")
+    fun getLogin(username: String,password: String) {
+        val login= LoginRequest(username,password)
         loginUseCase.invoke(login)
             .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(

@@ -10,7 +10,8 @@ import com.example.setsiscase.databinding.ItemCartBinding
 import com.example.setsiscase.domain.model.ProductModelUI
 
 
-class CartAdapter(var itemList: ArrayList<ProductModelUI>):
+
+class CartAdapter():
     RecyclerView.Adapter<CartAdapter.ItemHolder>() {
 
     fun setList(list: ArrayList<ProductModelUI>) {
@@ -18,9 +19,26 @@ class CartAdapter(var itemList: ArrayList<ProductModelUI>):
         notifyDataSetChanged()
     }
 
-    inner class ItemHolder(val binding: ItemCartBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+     class ItemHolder(val binding: ItemCartBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    private val diffUtil = object : DiffUtil.ItemCallback<ProductModelUI>() {
+        override fun areItemsTheSame(oldItem: ProductModelUI, newItem: ProductModelUI): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: ProductModelUI, newItem: ProductModelUI): Boolean {
+            return oldItem == newItem
+        }
+
     }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var itemList: List<ProductModelUI>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val itemBinding= ItemCartBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -36,5 +54,4 @@ class CartAdapter(var itemList: ArrayList<ProductModelUI>):
 
     override fun getItemCount(): Int = itemList.size
 }
-
 

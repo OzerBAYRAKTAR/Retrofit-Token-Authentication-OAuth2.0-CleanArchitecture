@@ -49,6 +49,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         getSumOfCart()
 
 
+        //for delete with swipe
         val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -64,14 +65,16 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 Snackbar.make(requireView(),"Sepetten Kaldırıldı", Snackbar.LENGTH_LONG)
                     .setAction("İptal Et",View.OnClickListener {
                         viewModel.insertProduct(cartadapter.itemList[position])
+                        cartadapter.setList(list)   //if we dont do that, recyclerview not showing current list after inserted data
                     }).show()
             }
         }
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.cartRecyclerView)
+
         recyclerView()
         getCarts()
-    }
 
+    }
     private fun getCarts(){
         CoroutineScope(Dispatchers.Main).launch {
             viewModel._state.collect{value->
@@ -88,9 +91,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             }
         }
     }
-
     private fun recyclerView(){
-        cartadapter= CartAdapter(ArrayList())
+        cartadapter= CartAdapter()
         fragmentBinding?.cartRecyclerView?.adapter = cartadapter
         fragmentBinding?.cartRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
         fragmentBinding!!.cartRecyclerView.setHasFixedSize(true)

@@ -21,7 +21,6 @@ class HomeAdapter(var itemList: ArrayList<ProductModelUI>,
                     clickListener.onItemClicked(product)
                 }
             }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {

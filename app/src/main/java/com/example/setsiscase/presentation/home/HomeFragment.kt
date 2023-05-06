@@ -48,12 +48,15 @@ class HomeFragment : Fragment(R.layout.fragment_home),OnItemClickListener {
                 when {
                     value.isLoading -> {
                         fragmentBinding!!.homeProgressBar.visibility=View.VISIBLE
+                        fragmentBinding!!.homeError.visibility=View.INVISIBLE
                     }
                     value.error.isNotBlank() -> {
                         fragmentBinding!!.homeProgressBar.visibility=View.INVISIBLE
+                        fragmentBinding!!.homeError.visibility=View.VISIBLE
                     }
                     value.infoList.isNotEmpty() -> {
                         fragmentBinding!!.homeProgressBar.visibility=View.INVISIBLE
+                        fragmentBinding!!.homeError.visibility=View.INVISIBLE
                         list.addAll(value.infoList)
                         adapter.setData(list as ArrayList<ProductModelUI>)
                     }

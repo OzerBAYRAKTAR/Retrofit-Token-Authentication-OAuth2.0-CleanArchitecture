@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.product.ProductActivity">
 
-    <ProgressBar
-        android:id="@+id/productProgressBar"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"

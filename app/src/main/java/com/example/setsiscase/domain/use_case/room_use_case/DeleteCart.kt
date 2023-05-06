@@ -9,7 +9,6 @@ class DeleteCart(
 ) {
     @Throws(InvalidFavoriteException::class)
     suspend operator fun invoke(product: ProductModelUI) {
-
         repository.delete(product)
     }
 }

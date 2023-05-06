@@ -21,8 +21,6 @@ class AuthInterceptor @Inject constructor(@ApplicationContext context: Context) 
 
         requestBuilder
             .addHeader("Authorization","Bearer $token")
-        println(" auth $token")
-
 
         return chain.proceed(requestBuilder.build())
     }

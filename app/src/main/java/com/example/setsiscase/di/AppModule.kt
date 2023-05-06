@@ -44,8 +44,8 @@ object AppModule {
             val intercepter= HttpLoggingInterceptor()
             intercepter.level = HttpLoggingInterceptor.Level.BODY
             return OkHttpClient.Builder()
-                .readTimeout(15, TimeUnit.SECONDS)
-                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
                 .authenticator(AuthAuthenticator(context))
                 .addInterceptor(AuthInterceptor(context))
                 .addInterceptor(intercepter)
