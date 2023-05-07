@@ -3,7 +3,7 @@
 
 ## Authenticate to OAuth2 Services 🔍
 
--- In order to securely access an online service, users need to authenticate to the service—they need to provide proof of their identity. For an application that accesses a third-party service, the security problem is even more complicated. 
+-- In order to securely access an online service, users need to authenticate to the service they need to provide proof of their identity. For an application that accesses a third-party service, the security problem is even more complicated. 
 Not only does the user need to be authenticated to access the service, but the application also needs to be authorized to act on the user's behalf.
 The industry standard way to deal with authentication to third-party services is the OAuth2 protocol. OAuth2 provides a single value, called an auth token, that represents both the user's identity and the application's authorization to act on the user's behalf. 
 This lesson demonstrates connecting to a Google server that supports OAuth2. Although Google services are used as an example, the techniques demonstrated will work on any service that correctly supports the OAuth2 protocol.
