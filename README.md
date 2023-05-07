@@ -34,27 +34,27 @@ The refresh token exists to enable authorization servers to use short lifetimes 
         3-) Presentation: it’s android specific and contains fragments, view models, adapters, activities, and so on. It also contains a service locator to manage dependencies, but you can use Hilt if you prefer.
 
 
-* MVVM(Model-View-ViewModel) : Software design pattern that is structured to separate program logic and user interface control
+* [MVVM(Model-View-ViewModel)](https://www.digitalocean.com/community/tutorials/android-mvvm-design-pattern) : Software design pattern that is structured to separate program logic and user interface control
 
-* Retrofit : Retrofit is a type-safe REST client for Android, Java and Kotlin developed by Square. The library provides a powerful framework for authenticating and interacting with APIs and sending network requests with OkHttp.
+* [Retrofit](https://square.github.io/retrofit/) : Retrofit is a type-safe REST client for Android, Java and Kotlin developed by Square. The library provides a powerful framework for authenticating and interacting with APIs and sending network requests with OkHttp.
 
-* Room DB : The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite
+* [Room DB](https://developer.android.com/training/data-storage/room) : The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite
 
-* Shared Preferences : A SharedPreferences object points to a file containing key-value pairs and provides simple methods to read and write them. Each SharedPreferences file is managed by the framework and can be private or shared.
+* [Shared Preferences](https://developer.android.com/training/data-storage/shared-preferences) : A SharedPreferences object points to a file containing key-value pairs and provides simple methods to read and write them. Each SharedPreferences file is managed by the framework and can be private or shared.
 
-* Dependency injection with Hilt : Hilt provides a standard way to use DI in your application by providing containers for every Android class in your project and managing their lifecycles automatically. Hilt is built on top of the popular DI library Dagger to benefit from the compile-time correctness, runtime performance, scalability, and Android Studio support that Dagger provides.
+* [Dependency injection with Hilt](https://developer.android.com/training/dependency-injection/hilt-android) : Hilt provides a standard way to use DI in your application by providing containers for every Android class in your project and managing their lifecycles automatically. Hilt is built on top of the popular DI library Dagger to benefit from the compile-time correctness, runtime performance, scalability, and Android Studio support that Dagger provides.
 
-* Coroutines : A coroutine is a concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
+* [Coroutines](https://developer.android.com/kotlin/coroutines?hl=en) : A coroutine is a concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
 
-* LiveData : LiveData is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services. 
+* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) : LiveData is an observable data holder class. Unlike a regular observable, LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components, such as activities, fragments, or services. 
 
-* Kotlin Flow : In coroutines, a flow is a type that can emit multiple values sequentially, as opposed to suspend functions that return only a single value. 
+* [Kotlin Flow](https://developer.android.com/kotlin/flow?hl=en) : In coroutines, a flow is a type that can emit multiple values sequentially, as opposed to suspend functions that return only a single value. 
 
-* ViewBinding : View binding is a feature that makes it easier to write code that interacts with views. Once view binding is enabled in a module, it generates a binding class for each XML layout file present in that module. 
+* [ViewBinding](https://developer.android.com/topic/libraries/view-binding) : View binding is a feature that makes it easier to write code that interacts with views. Once view binding is enabled in a module, it generates a binding class for each XML layout file present in that module. 
 
-* Retrofit Pagination : With the paging library, you can load and display small chunks of data at a time. Loading partial data on demand reduces the usage of network bandwidth and system resources. 
+* [Retrofit Pagination](https://medium.com/nerd-for-tech/pagination-in-android-with-paging-3-retrofit-and-kotlin-flow-2c2454ff776e) : With the paging library, you can load and display small chunks of data at a time. Loading partial data on demand reduces the usage of network bandwidth and system resources. 
 
-* OKHttp : OkHttp is an efficient HTTP & HTTP/2 client for Android and Java applications.
+* [OKHttp](https://www.baeldung.com/guide-to-okhttp) : OkHttp is an efficient HTTP & HTTP/2 client for Android and Java applications.
 
          It comes with advanced features, such as connection pooling (if HTTP/2 isn’t available), transparent GZIP compression, and response caching, to avoid the network completely for repeated requests.
 
